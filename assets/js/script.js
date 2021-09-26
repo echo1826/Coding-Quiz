@@ -8,11 +8,11 @@ var questionIndex = 0;
 var amountRight = 0;
 const questions = [{
     title: "What is 1+1?",
-    choices: [1, 2, 3, 4],
+    choices: ["1", "2", "3", "4"],
     answer: 2
 }, {
     title: "What is 2+2",
-    choices: [2, 3, 4, 5],
+    choices: ["2", "3", "4", "5"],
     answer: 4
 }]
 
@@ -52,6 +52,7 @@ function generateQuestion() {
     resetArea();
     if(questionIndex === questions.length) {
         showResults();
+        return;
     }
 
     let currentQuestion = questions[questionIndex];
@@ -62,19 +63,28 @@ function generateQuestion() {
     
     for (let j = 0; j <=3; j++) {
         let tempButton = document.createElement("button");
-        tempButton.setAttribute = ("value", currentQuestion.choices[j]);
-        console.log(tempButton.getAttribute("value"));
+
+        let dataValue = currentQuestion.choices[j];
+
+        tempButton.setAttribute("data-value", dataValue);
+        let dataTest = tempButton.getAttribute("data-value");
+
+        console.log(dataTest);
         tempButton.textContent = currentQuestion.choices[j];
+
         quizChoices.appendChild(tempButton);
+
         tempButton.addEventListener("click", validateQuestion);
     }
 }
 
 
-function validateQuestion(tempButton) {
-    console.log(this.value);
-    if(this.value === questions.answer) {
+function validateQuestion() {
+
+    let dataTest = tempButton.getAttribute("value");
+    if(dataTest == questions.answer) {
         amountRight++;
+        console.log(amountRight);
         questionIndex++;
         generateQuestion();
     } else {
