@@ -5,6 +5,7 @@ var quizChoices = document.getElementById("quizChoices");
 var quizQuestion = document.getElementById("quizQuestion");
 var submitInitials = document.getElementById("submitArea");
 var highScoreScreen = document.getElementById("scores");
+var rootEl = document.getElementById("root");
 let highRight = 0;
 var timeLeft = 99;
 var questionIndex = 0;
@@ -69,10 +70,9 @@ highScoreBtn.addEventListener("click", displayScores);
 
 function generateQuestion() {
     console.log("Question generates")
-    // while(timeLeft > 0) {
-    console.log("loop starts");
+    
     resetArea();
-
+    
     let currentQuestion = questions[questionIndex];
 
     //quizQuestion.textContent = currentQuestion.title;
@@ -103,7 +103,7 @@ function validateQuestion() {
     if (this.value == questions[questionIndex].answer) {
         amountRight++;
         console.log(this);
-        this.style.backgroundColor = "green";
+        rootEl.style.backgroundColor = "green";
         console.log(amountRight);
         questionIndex++;
         if (questionIndex === questions.length) {
@@ -117,6 +117,7 @@ function validateQuestion() {
     } else {
         questionIndex++;
         timeLeft -= 5;
+        rootEl.style.backgroundColor = "red";
         if (timeLeft > 0) {
             let timeInterval = setInterval(function () {
                 // As long as the `timeLeft` is greater than 1
