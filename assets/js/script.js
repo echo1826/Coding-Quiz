@@ -5,27 +5,43 @@ var quizChoices = document.getElementById("quizChoices");
 var quizQuestion = document.getElementById("quizQuestion");
 var submitInitials = document.getElementById("submitArea");
 var highScoreScreen = document.getElementById("scores");
-var timeLeft = 10;
+let highRight = 0;
+var timeLeft = 99;
 var questionIndex = 0;
 var amountRight = 0;
 const questions = [{
-    title: "What is 1+1?",
-    choices: ["1", "2", "3", "4"],
-    answer: 2
+    title: "What data type is true?",
+    choices: ["number", "string", "boolean", "variable"],
+    answer: "boolean"
 }, {
-    title: "What is 2+2",
-    choices: ["2", "3", "4", "5"],
-    answer: 4
+    title: "What does '=' mean?",
+    choices: ["Equal", "Equal Sign", "Equivalent", "Assignment"],
+    answer: "Assignment"
+}, {
+    title: "What is an array?",
+    choices: ["Number", "Boolean", "Loop", "Collection of items"],
+    answer: "Collection of items"
+}, {
+    title: "What is an if statement?",
+    choices: ["Conditional Statement", "Declaration", "Loop", "Call function"],
+    answer: "Conditional Statement"
+}, {
+    title: "How to declare variable?",
+    choices: ["variable", "var", "int", "bool"],
+    answer: "var"
 }];
 
 
 startBtn.addEventListener("click", function () {
     console.log("Timer starts")
+    let h1El = document.getElementById("starto");
+    h1El.style.display = "none";
+    startBtn.style.display = "none";
+    quizQuestion.style.display = "block";
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     let timeInterval = setInterval(function () {
         // As long as the `timeLeft` is greater than 1
         if (timeLeft > 1) {
-            console.log("display update");
             // Set the `textContent` of `timerDiv` to show the remaining seconds
             timerDiv.textContent = timeLeft + ' seconds remaining';
             // Decrement `timeLeft` by 1
@@ -69,7 +85,7 @@ function generateQuestion() {
         let dataValue = currentQuestion.choices[j];
 
         tempButton.setAttribute("value", dataValue);
-        let dataTest = tempButton.getAttribute("value");
+        // let dataTest = tempButton.getAttribute("value");
 
         tempButton.textContent = currentQuestion.choices[j];
 
@@ -77,15 +93,17 @@ function generateQuestion() {
 
         tempButton.addEventListener("click", validateQuestion);
     }
-
+    
 }
 
 
 
 function validateQuestion() {
-    //console.log("Validiation happens");
+    // console.log(this.value);
     if (this.value == questions[questionIndex].answer) {
         amountRight++;
+        console.log(this);
+        this.style.backgroundColor = "green";
         console.log(amountRight);
         questionIndex++;
         if (questionIndex === questions.length) {
@@ -159,7 +177,6 @@ function storeResults() {
     submitButton.addEventListener("click", function () {
         console.log("storing locally now");
         let submitName = submitText.value.trim();
-        let highRight = 0;
         if(amountRight > highRight) {
             let highName = submitName;
             let highRight = amountRight;
@@ -171,8 +188,7 @@ function storeResults() {
         console.log(submitName);
         console.log(amountRight);
         localStorage.setItem("1", JSON.stringify(userScores));
-
-        
+        submitInitials.remove();
     });
 }
 
