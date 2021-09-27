@@ -1,5 +1,5 @@
 var startBtn = document.getElementById("startBtn");
-var highScoreBtn = document.getElementById("highScores");
+var highScoreBtn = document.getElementById("highScoresButton");
 var timerDiv = document.getElementById("timer");
 var quizChoices = document.getElementById("quizChoices");
 var quizQuestion = document.getElementById("quizQuestion");
@@ -193,7 +193,7 @@ function storeResults() {
 }
 
 function displayScores() {
-    document.getElementById("highScoresButton").style.display = "none";
+    highScoreBtn.style.display = "none";
     let headerScore = document.createElement("h2");
     highScoreScreen.appendChild(headerScore);
     headerScore.textContent = "High Scores";
