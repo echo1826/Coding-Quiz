@@ -4,7 +4,7 @@ var timerDiv = document.getElementById("timer");
 var quizChoices = document.getElementById("quizChoices");
 var quizQuestion = document.getElementById("quizQuestion");
 var submitInitials = document.getElementById("submitArea");
-var highScoreScreen = document.getElementById("scores")
+var highScoreScreen = document.getElementById("scores");
 var timeLeft = 10;
 var questionIndex = 0;
 var amountRight = 0;
@@ -34,7 +34,7 @@ startBtn.addEventListener("click", function () {
             // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
             timerDiv.textContent = timeLeft + ' second remaining';
             timeLeft--;
-        } else if(timeLeft === 0){
+        } else if (timeLeft === 0) {
             console.log("time is 0");
             // Once `timeLeft` gets to 0, set `timerDiv` to an empty string
             timerDiv.textContent = '';
@@ -79,7 +79,7 @@ function generateQuestion() {
     }
 
 }
-    
+
 
 
 function validateQuestion() {
@@ -95,11 +95,11 @@ function validateQuestion() {
         } else {
             generateQuestion();
         }
-        
+
     } else {
         questionIndex++;
         timeLeft -= 5;
-        if(timeLeft > 0) {
+        if (timeLeft > 0) {
             let timeInterval = setInterval(function () {
                 // As long as the `timeLeft` is greater than 1
                 if (timeLeft > 1) {
@@ -115,18 +115,17 @@ function validateQuestion() {
                 timeLeft = null;
                 showResults();
                 //return;
-                
-            } else {
-                timeCheck();
+
+            } else {;
                 generateQuestion();
             }
-            
+
         } else {
             timeLeft = null;
             showResults();
         }
     }
-    
+
 }
 
 function showResults() {
@@ -155,9 +154,16 @@ function storeResults() {
     submitInitials.appendChild(submitText);
     submitInitials.appendChild(submitButton);
 
-    submitButton.addEventListener("click", function() {
+    refreshPage();
+
+    submitButton.addEventListener("click", function () {
         console.log("storing locally now");
         let submitName = submitText.value.trim();
+        let highRight = 0;
+        if(amountRight > highRight) {
+            let highName = submitName;
+            let highRight = amountRight;
+        }       
         const userScores = {
             initials: submitName,
             rightQuestion: amountRight
@@ -165,6 +171,8 @@ function storeResults() {
         console.log(submitName);
         console.log(amountRight);
         localStorage.setItem("1", JSON.stringify(userScores));
+
+        
     });
 }
 
@@ -177,7 +185,16 @@ function displayScores() {
     highScoreScreen.appendChild(scoresBox);
     let scores = document.createElement("li");
     scoresBox.appendChild(scores);
-    let scoreObject =JSON.parse(localStorage.getItem("1"));
-    console.log(scoreObject);
-    scores.textContent = scoreObject.initials + ": " +scoreObject.rightQuestion;
+    let scoreObject = JSON.parse(localStorage.getItem("1"));
+    //console.log(scoreObject);
+    scores.textContent = scoreObject.initials + ": " + scoreObject.rightQuestion;
+}
+
+function refreshPage() {
+    refreshButton = document.createElement("button");
+    refreshButton.textContent = "start again";
+    timerDiv.appendChild(refreshButton)
+    refreshButton.addEventListener("click", function() {
+        window.location.reload();
+    })
 }
