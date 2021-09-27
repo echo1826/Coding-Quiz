@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-#quizChoices button{
+#quizChoices button {
     font-size: 25px;
     padding: 5px 10px 5px 10px;
     width: 15%;
@@ -17,13 +17,13 @@
     
 }
 
-#highScores button {
+#highScores #highScoresButton {
     border: none;
     background-color: white;
     color: purple;
 }
 
-#highScores button:hover {
+#highScores #highScoreButton:hover {
     border: 1px solid;
     background-color: yellow;
     border-radius: 5px;
@@ -31,4 +31,8 @@
 
 #timer {
     font-size: 50px;
+}
+
+ul {
+    list-style-type: none;
 }
