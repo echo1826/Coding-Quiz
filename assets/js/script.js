@@ -204,7 +204,7 @@ function displayScores() {
     scoresBox.appendChild(scores);
     let scoreObject = JSON.parse(localStorage.getItem("1"));
     //console.log(scoreObject);
-    scores.textContent = scoreObject.initials + ": " + scoreObject.rightQuestion;
+    scores.textContent = scoreObject.initials + ": " + scoreObject.rightQuestion + " questions right";
 }
 
 function refreshPage() {

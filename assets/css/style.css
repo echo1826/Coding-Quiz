@@ -61,3 +61,7 @@ ul {
     justify-content: center;
     padding-top: 30px;
 }
+
+#scores {
+    font-size: 30px;
+}
